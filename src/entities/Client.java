@@ -9,7 +9,7 @@ public class Client {
 	private LocalDate birthDate;
 	
 	
-	private static DateTimeFormatter stf = DateTimeFormatter.ofPattern("dd/MM/yyy");
+	private static DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyy");
 	
 	public Client() {
 	}
@@ -48,7 +48,7 @@ public class Client {
 	public String toString() {
 		return name
 				+ " ("
-				+ stf.format(birthDate)
+				+ dtf.format(birthDate)
 				+ ") - "
 				+ email;
 	}

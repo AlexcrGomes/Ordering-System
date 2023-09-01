@@ -1,6 +1,7 @@
 package entities;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +9,9 @@ import entities.enums.OrderStatus;
 
 public class Order {
 	
-	private LocalDate moment;
+	private static DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyy HH:mm:SS");
+	
+	private LocalDateTime moment;
 	private OrderStatus status;
 	
 	private Client client;
@@ -19,7 +22,7 @@ public class Order {
 	}
 
 	
-	public Order(LocalDate moment, OrderStatus status, Client client) {
+	public Order(LocalDateTime moment, OrderStatus status, Client client) {
 		this.moment = moment;
 		this.status = status;
 		this.client = client;
@@ -28,12 +31,12 @@ public class Order {
 	
 
 
-	public LocalDate getMoment() {
+	public LocalDateTime getMoment() {
 		return moment;
 	}
 
 
-	public void setMoment(LocalDate moment) {
+	public void setMoment(LocalDateTime moment) {
 		this.moment = moment;
 	}
 
@@ -72,5 +75,25 @@ public class Order {
 		}
 		return sum;
 	}
+
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Order moment: ");
+		sb.append(dtf.format(moment) + "\n");
+		sb.append("Order status: ");
+		sb.append(status + "\n");
+		sb.append("Client: ");
+		sb.append(client + "\n");
+		sb.append("Order items:\n");
+		for (OrderItem item : items) {
+			sb.append(item + "\n");
+		}
+		sb.append("Total price: $");
+		sb.append(String.format("%.2f", total()));
+		return sb.toString();
+	}
+	
 	
 }
